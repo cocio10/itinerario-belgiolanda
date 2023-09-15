@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
       <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/cocio10/itinerario-belgiolanda/main/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,6 +50,7 @@
             padding: 10px;
             border: 1px solid #ddd;
             cursor: pointer;
+            line-height: 150%;
         }
 
         .description {
@@ -57,10 +59,10 @@
             background-color: #f9f9f9;
         }
 
+
         .description.active {
             display: block;
         }
-
         .price {
             font-size: 18px;
             color: #333;
@@ -92,7 +94,23 @@
             background-color: #f9f9f9;
             font-weight: bold;
         }
-    </style>
+ .arrow-down {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  margin-left:10px;
+}
+
+.arrow-down::before {
+  content: '\f107'; /* Codice dell'icona freccia verso il basso in FontAwesome */
+  font-size: 24px; /* Dimensione dell'icona */
+  color: #000; /* Colore dell'icona */
+}
+.arrow-down.active::before {
+    content: '\f106';
+}
+</style>
 </head>
 <body>
     <div class="container">
@@ -149,9 +167,9 @@
         </div>
 
         <!-- Sabato 25 -->
-        <div class="day" onclick="toggleDescription('sabato')">
+        <div class="day" onclick="toggleDescription('sabato','sabato1')">
             <div class="bold">Sab 25 e dom 26 novembre</div>
-            <div class="bold" style="text-align: right;">Rotterdam - Amsterdam</div>
+            <div class="bold" style="text-align: right;">Rotterdam - Amsterdam<span id="sabato1" class="arrow-down"></span></div>
         </div>
         <div id="sabato" class="description">
             <div class="table">
@@ -198,10 +216,19 @@
     </div>
 
     <script>
-        function toggleDescription(id) {
-            var element = document.getElementById(id);
-            element.classList.toggle("active");
-        }
-    </script>
+function toggleDescription(dayId, descriptionId) {
+    var dayElement = document.getElementById(dayId);
+    dayElement.classList.toggle("active");
+
+    var arrow = dayElement.querySelector(".arrow-down");
+
+    if (arrow) {
+        arrow.classList.toggle("active");
+    }
+
+    var descriptionElement = document.getElementById(descriptionId);
+    descriptionElement.classList.toggle("active");
+}
+</script>
 </body>
 </html>
